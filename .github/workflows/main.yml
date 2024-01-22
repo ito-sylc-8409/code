@@ -4,9 +4,6 @@ on:
   push:
     branches: [ main ]
 
-permissions:
-  contents: write
-
 jobs:
   build:
     name: GitOps Workflow
@@ -60,7 +57,7 @@ jobs:
           git commit -m "Update tag ${{ github.run_number }}"
           #git pushでエラーになる
           #fatal: could not read Username for 'https://github.com': No such device or address
-          git remote add from-actions https://github-actions:${GH_TOKEN}@github.com/config.git
+          #git remote add from-actions https://github-actions:${GH_TOKEN}@github.com/config.git
           #git remote -v
           git config --unset-all http.https://github.com/.extraheader
           git push origin feature/${{ github.run_number }}
@@ -69,4 +66,5 @@ jobs:
           # gh auth login --with-token < token.txt
           #gh pr create  --title "Update Tag ${{ github.run_number }}" --body "Please Merge !!"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.CONFIG_PAT }}
