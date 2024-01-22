@@ -58,7 +58,7 @@ jobs:
           #git pushでエラーになる
           #fatal: could not read Username for 'https://github.com': No such device or address
           git remote add from-actions https://github-actions:${GH_TOKEN}@github.com/config.git
-          git remote -v
+          #git remote -v
           git config --unset-all http.https://github.com/.extraheader
           git push origin feature/${{ github.run_number }}
           # プルリクエスト処理
