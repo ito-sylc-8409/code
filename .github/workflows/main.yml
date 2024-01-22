@@ -38,7 +38,8 @@ jobs:
 
         # values.yamlの更新、新規ブランチ作成、プッシュ、プルリクエスト
       - name: Update values.yaml & Pull Request to Config Repository
-        env: GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # GitHubログイン
           # ${{ secrets.USERNAME }}
