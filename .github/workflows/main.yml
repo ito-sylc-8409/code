@@ -35,12 +35,14 @@ jobs:
           echo "${{ secrets.DOC_PASSWORD }}" | docker login docker.io --username ${{ secrets.DOC_USERNAME }} --password-stdin
           # イメージプッシュ
           docker image push ${{ secrets.DOC_USERNAME }}/gitops-go-app:${{ github.run_number }}
-
-        # values.yamlの更新、新規ブランチ作成、プッシュ、プルリクエスト
-      - name: Update values.yaml & Pull Request to Config Repository
+      
+      - name: hoge
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.CONFIG_PAT }}
+
+        # values.yamlの更新、新規ブランチ作成、プッシュ、プルリクエスト
+      - name: Update values.yaml & Pull Request to Config Repository
         run: |
           # GitHubログイン
           #echo -e "machine github.com\nlogin ${{ secrets.GIT_USERNAME }}\npassword ${{ secrets.GIT_PASSWORD }}" > ~/.netrc
