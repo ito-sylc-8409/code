@@ -42,6 +42,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # GitHubログイン
+          # GitHubログイン
+          echo -e "machine github.com\nlogin ${{ secrets.GIT_USERNAME }}\npassword ${{ secrets.GIT_PASSWORD }}" > ~/.netrc
           # 「config」リポジトリからクローン
           git clone https://github.com/${{ secrets.GIT_USERNAME }}/config.git
           # values.yamlファイルの更新処理
@@ -54,7 +56,6 @@ jobs:
           # values.yamlのタグ番号を更新
           sed -i 's/tag: [0-9]*/tag: ${{ github.run_number }}/g' values.yaml
           # プッシュ処理
-          git remote -v
           git add values.yaml
           git commit -m "Update tag ${{ github.run_number }}"
           git push origin feature/${{ github.run_number }}
