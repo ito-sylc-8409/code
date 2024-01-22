@@ -58,6 +58,9 @@ jobs:
           git add values.yaml
           git commit -m "Update tag ${{ github.run_number }}"
           git remote -v
+          #git pushでエラーになる
+          #fatal: could not read Username for 'https://github.com': No such device or address
+          git config --unset-all http.https://github.com/.extraheader
           git push origin feature/${{ github.run_number }}
           # プルリクエスト処理
           # echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} > token.txt
