@@ -38,6 +38,8 @@ jobs:
 
         # values.yamlの更新、新規ブランチ作成、プッシュ、プルリクエスト
       - name: Update values.yaml & Pull Request to Config Repository
+        with:
+          token: ${{ secrets.CONFIG_PAT }}
         run: |
           # GitHubログイン
           #echo -e "machine github.com\nlogin ${{ secrets.GIT_USERNAME }}\npassword ${{ secrets.GIT_PASSWORD }}" > ~/.netrc
@@ -67,5 +69,3 @@ jobs:
           #gh pr create  --title "Update Tag ${{ github.run_number }}" --body "Please Merge !!"
         #env:
           #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          token: ${{ secrets.CONFIG_PAT }}
