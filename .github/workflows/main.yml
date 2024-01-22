@@ -38,6 +38,8 @@ jobs:
 
         # values.yamlの更新、新規ブランチ作成、プッシュ、プルリクエスト
       - name: Update values.yaml & Pull Request to Config Repository
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # GitHubログイン
           echo -e "machine github.com\nlogin ${{ secrets.GIT_USERNAME }}\npassword ${{ secrets.GIT_PASSWORD }}" > ~/.netrc
@@ -55,6 +57,7 @@ jobs:
           # プッシュ処理
           git add values.yaml
           git commit -m "Update tag ${{ github.run_number }}"
+          git remote -v
           git push origin feature/${{ github.run_number }}
           # プルリクエスト処理
           # echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} > token.txt
