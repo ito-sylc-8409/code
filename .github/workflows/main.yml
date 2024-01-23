@@ -19,8 +19,6 @@ jobs:
       #code/mainをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          path: code
       
       #test
       - name: test1
@@ -34,7 +32,6 @@ jobs:
         with:
           repository: ${{ secrets.GIT_USERNAME }}/config
           token: ${{ secrets.CONFIG_PAT }}
-          path: config
       
       #test
       - name: test2
