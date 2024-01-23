@@ -29,8 +29,7 @@ jobs:
           git config --global user.name "${{ secrets.GIT_USERNAME }}"
       
             # values.yamlの更新、新規ブランチ作成、プッシュ、プルリクエスト
-      - name: Update values.yaml & Pull Request to Config Repository
-
+      
       #新しくブランチを作成してvalues.yamlを書き換えてPush
       - name: make new branch, update values.yaml
         run: |
