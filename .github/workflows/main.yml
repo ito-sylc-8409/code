@@ -10,6 +10,7 @@ jobs:
     name: GitOps Workflow
     runs-on: ubuntu-latest
     steps:
+      #code/mainをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
       
@@ -30,7 +31,7 @@ jobs:
             # values.yamlの更新、新規ブランチ作成、プッシュ、プルリクエスト
       
       #新しくブランチを作成してvalues.yamlを書き換えてPush
-      - name: make new branch, update values.yaml
+      - name: make new branch and update values.yaml
         run: |
           # 新規ブランチ作成
           git branch feature/${{ github.run_number }}
