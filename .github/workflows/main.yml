@@ -10,7 +10,6 @@ jobs:
     name: GitOps Workflow
     runs-on: ubuntu-latest
     steps:
-      #code/mainをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
       
