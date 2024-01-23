@@ -26,7 +26,7 @@ jobs:
         with:
           repository: ${{ secrets.GIT_USERNAME }}/config
           token: ${{ secrets.CONFIG_PAT }}
-          path: config
+          path: $GITHUB_WORKSPACE/config
       
       #test
       - name: test2
