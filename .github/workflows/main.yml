@@ -10,31 +10,38 @@ jobs:
     name: GitOps Workflow
     runs-on: ubuntu-latest
     steps:
-      #test
-      - name: test0
-        run: |
-          pwd
-          ls -la
-
       #code/mainをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
       
-      #test
-      - name: test1
-        run: |
-          pwd
-          ls -la
-      
-      #configリポジトリのmainブランチのチェックアウト
+      #config/mainをチェックアウト
       - name: Checkout code2
         uses: actions/checkout@v3
         with:
           repository: ${{ secrets.GIT_USERNAME }}/config
           token: ${{ secrets.CONFIG_PAT }}
       
-      #test
+      #test1
+      - name: test1
+        run: |
+          ls -la
+          cd gitops-helm
+          git config --global user.email "${{ secrets.MAIL }}"
+          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+      
+      #test2
       - name: test2
         run: |
-          pwd
-          ls -la
+          # 新規ブランチ作成
+          git branch feature/${{ github.run_number }}
+          git checkout feature/${{ github.run_number }}
+          # values.yamlのタグ番号を更新
+          sed -i 's/tag: [0-9]*/tag: ${{ github.run_number }}/g' values.yaml
+
+      #test3
+      - name: test3
+        run: |
+          #add, commit, push
+          git add values.yaml
+          git commit -m "Update tag ${{ github.run_number }}"
+          git push origin feature/${{ github.run_number }}
